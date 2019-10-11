@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-    res.send("This is first basic node JS app with Jenkins - seventh changed made")
+    res.send("This is first basic node JS app with Jenkins - eight changed made")
 })
 
 app.listen(port, () => {
