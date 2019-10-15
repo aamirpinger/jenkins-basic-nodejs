@@ -6,6 +6,9 @@ pipeline {
         args '-p 3000:3000'
     }
     }
+    options {
+        disableConcurrentBuilds()
+    }
     stages {
         stage('Build') {
             steps {
