@@ -23,5 +23,10 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            echo 'All went well!'
+        }
+    }
 
 }
