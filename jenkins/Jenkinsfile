@@ -29,7 +29,7 @@ pipeline {
                 * and load them with 'libaryResource'
                 */
                 sh """
-                docker rm ${APP} --force
+                docker rm ${APP} --force || true
                 docker run -d --name ${APP} -p 3000:3000
                 """
             }
