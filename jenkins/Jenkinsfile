@@ -2,7 +2,11 @@ pipeline {
    triggers {
         pollSCM 'H/2 * * * *'
     }
-     agent any
+     agent {
+         docker{
+            image: node:alpine
+         }
+     }
     options {
         disableConcurrentBuilds()
     }
