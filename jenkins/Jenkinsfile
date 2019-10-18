@@ -2,7 +2,7 @@ pipeline {
    triggers {
         pollSCM 'H/2 * * * *'
     }
-     agent any
+    agent any
     options {
         disableConcurrentBuilds()
     }
@@ -39,9 +39,9 @@ pipeline {
      post {
         success {
             // docker rm ${APP} --force || true
-            sh """
-                docker run -d --name ${APP} -p 3000:3000 ${APP}
-                """
+            // sh """
+            //     docker run -d --name ${APP} -p 3000:3000 ${APP}
+            //     """
             echo "App can be accessed from http://localhost:3000"
         }
     }
