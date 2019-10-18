@@ -23,7 +23,8 @@ pipeline {
                 sh """
                 apk update && apk upgrade && \
                 apk add --no-cache git docker
-
+                pwd
+                ls
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
                 docker build -t ${APP} .
