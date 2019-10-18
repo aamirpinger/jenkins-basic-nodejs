@@ -2,7 +2,11 @@ pipeline {
    triggers {
         pollSCM 'H/2 * * * *'
     }
-    agent any
+     agent {
+         docker{
+            image 'node:10-alpine'
+         }
+     }
     options {
         disableConcurrentBuilds()
     }
@@ -15,8 +19,10 @@ pipeline {
                 /*
                 * Multiline strings can be used for larger scripts.
                 */
-                // rm 'jenkins-basic-nodejs' -r || true
+                //rm 'jenkins-basic-nodejs' -r || true
                 sh """
+                apk update && apk upgrade && \
+                apk add --no-cache git docker
 
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
@@ -32,16 +38,13 @@ pipeline {
                 */
                 sh """
                 docker rm ${APP} --force || true
+                docker run -d --name ${APP} -p 3000:3000 ${APP}
                 """
-                  // docker run -d --name ${APP} -p 3000:3000 ${APP}
             }
         }
     }
      post {
         success {
-            sh """
-                docker run -d --name ${APP} -p 3000:3000 ${APP}
-                """
             echo "App can be accessed from http://localhost:3000"
         }
     }
