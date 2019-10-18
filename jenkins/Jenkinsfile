@@ -4,7 +4,7 @@ pipeline {
     }
      agent {
          docker{
-            image 'node:alpine'
+            image 'node:latest'
          }
      }
     options {
@@ -20,8 +20,8 @@ pipeline {
                 * Multiline strings can be used for larger scripts.
                 */
                 sh """
-                apt-get update && apt-update -y upgrade && \
-                apt-get install --no-cache git
+                apk update && apk upgrade && \
+                apk add --no-cache git
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
                 docker build -t ${APP} .
