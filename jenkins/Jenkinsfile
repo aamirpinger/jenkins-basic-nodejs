@@ -21,7 +21,7 @@ pipeline {
                 */
                 sh """
                 apk update && apk upgrade && \
-                apk add --no-cache git
+                apk add --no-cache git docker-ce
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
                 docker build -t ${APP} .
