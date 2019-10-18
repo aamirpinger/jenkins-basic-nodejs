@@ -20,7 +20,7 @@ pipeline {
                 * Multiline strings can be used for larger scripts.
                 */
                 sh """
-                RUN apt-get update && apt-update -y upgrade && \
+                apt-get update && apt-update -y upgrade && \
                 apt-get install --no-cache git
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
