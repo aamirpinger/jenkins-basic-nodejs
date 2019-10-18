@@ -26,7 +26,7 @@ pipeline {
                 apk add --no-cache git docker
                 pwd
                 ls
-                // cd jenkins-basic-nodejs
+                # cd jenkins-basic-nodejs
                 docker build -t ${APP} .
                 """
             }
