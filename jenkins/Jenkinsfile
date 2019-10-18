@@ -2,11 +2,7 @@ pipeline {
    triggers {
         pollSCM 'H/2 * * * *'
     }
-     agent {
-         docker{
-            image 'node:10-alpine'
-         }
-     }
+     agent any
     options {
         disableConcurrentBuilds()
     }
@@ -20,8 +16,6 @@ pipeline {
                 * Multiline strings can be used for larger scripts.
                 */
                 sh """
-                apk update && apk upgrade && \
-                apk add --no-cache git docker
                 rm 'jenkins-basic-nodejs' -r || true
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
