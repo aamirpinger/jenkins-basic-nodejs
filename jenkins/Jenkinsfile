@@ -2,31 +2,44 @@ pipeline {
     triggers {
         pollSCM 'H/2 * * * *'
     }
-    agent { dockerfile {
-        args '-p 3000:3000'
-    }
-    }
+    agent any
     options {
         disableConcurrentBuilds()
     }
+    environment {
+        APP = "ap-jenkins-basic-nodejs"
+    }
     stages {
-        stage('Build') {
+        stage('Build and Publish APP') {
             steps {
-                sh 'npm install'
+                /*
+                * Multiline strings can be used for larger scripts.
+                */
+                sh """
+                git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
+                cd jenkins-basic-nodejs
+                docker build -t ${APP} .
+                """
             }
         }
-        stage('Deliver') {
+    }
+        stages {
+        stage('deploy') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                // input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                // sh './jenkins/scripts/kill.sh'
+                /*
+                * Multiline strings can be used for larger scripts. It is also possible to put scripts in your shared library
+                * and load them with 'libaryResource'
+                */
+                sh """
+                docker rm ${APP} --force
+                docker run -d --name ${APP} -p 3000:3000
+                """
             }
         }
     }
     post {
         success {
-            echo 'All went well!'
+            echo "App can be accessed from http://localhost:3000"
         }
     }
-
 }
