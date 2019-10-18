@@ -38,8 +38,8 @@ pipeline {
     }
      post {
         success {
+            // docker rm ${APP} --force || true
             sh """
-                docker rm ${APP} --force || true
                 docker run -d --name ${APP} -p 3000:3000 ${APP}
                 """
             echo "App can be accessed from http://localhost:3000"
