@@ -1,8 +1,8 @@
 pipeline {
-    triggers {
+   triggers {
         pollSCM 'H/2 * * * *'
     }
-    agent any
+     agent any
     options {
         disableConcurrentBuilds()
     }
@@ -22,8 +22,6 @@ pipeline {
                 """
             }
         }
-    }
-        stages {
         stage('deploy') {
             steps {
                 /*
@@ -37,7 +35,7 @@ pipeline {
             }
         }
     }
-    post {
+     post {
         success {
             echo "App can be accessed from http://localhost:3000"
         }
