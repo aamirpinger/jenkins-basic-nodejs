@@ -5,7 +5,6 @@ pipeline {
      agent {
          docker{
             image 'node:10-alpine'
-            workdir '/abc'
          }
      }
     options {
@@ -20,7 +19,7 @@ pipeline {
                 /*
                 * Multiline strings can be used for larger scripts.
                 */
-
+            dir(path: '/abc'){
                 sh """
                 apk update && apk upgrade && \
                 apk add --no-cache git docker
@@ -31,6 +30,7 @@ pipeline {
                 cd jenkins-basic-nodejs
                 docker build -t ${APP} .
                 """
+                }
             }
         }
         stage('deploy') {
