@@ -22,6 +22,7 @@ pipeline {
                 sh """
                 apk update && apk upgrade && \
                 apk add --no-cache git docker
+                rm basic app using jenkins -r || true
                 git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 cd jenkins-basic-nodejs
                 docker build -t ${APP} .
@@ -36,7 +37,7 @@ pipeline {
                 */
                 sh """
                 docker rm ${APP} --force || true
-                docker run -d --name ${APP} -p 3000:3000
+                docker run -d --name ${APP} -p 3000:3000 ${APP}
                 """
             }
         }
