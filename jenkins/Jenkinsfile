@@ -44,5 +44,10 @@ pipeline {
         success {
             echo "App can be accessed from http://localhost:3000"
         }
+         failure {
+            mail to: 'aamirpinger@yahoo.com', from: 'aamirpinger@yahoo.com',
+                subject: "New build for '${env.JOB_NAME}' is failed!!",
+                body: "Job Failed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
+        }
     }
 }
