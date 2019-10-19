@@ -16,8 +16,6 @@ pipeline {
                 * Multiline strings can be used for larger scripts.
                 */
                 sh """
-
-                git
                 # rm 'jenkins-basic-nodejs' -r || true
                 # git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
                 # cd jenkins-basic-nodejs
