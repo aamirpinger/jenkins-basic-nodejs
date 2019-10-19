@@ -31,8 +31,7 @@ pipeline {
         stage('deploy') {
             steps {
                 /*
-                * Multiline strings can be used for larger scripts. It is also possible to put scripts in your shared library
-                * and load them with 'libaryResource'
+                * Multiline strings can be used for larger scripts.
                 */
                 sh """
                 docker rm ${APP} --force || true
@@ -43,6 +42,9 @@ pipeline {
     }
      post {
         success {
+            mail to: 'aamirpinger@yahoo.com', from: 'aamirpinger@yahoo.com',
+                subject: "New build for '${env.JOB_NAME}' is Successful!!",
+                body: "Job Succeed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
             echo "App can be accessed from http://localhost:3000"
         }
          failure {
