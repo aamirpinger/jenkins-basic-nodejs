@@ -16,8 +16,7 @@ pipeline {
                 * Multiline strings can be used for larger scripts.
                 */
                 sh """
-                // apk update && apk upgrade && \
-                // apk add --no-cache git docker
+
                 git
                 # rm 'jenkins-basic-nodejs' -r || true
                 # git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
