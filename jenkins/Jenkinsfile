@@ -1,36 +1,37 @@
 pipeline {
    agent any
-//    triggers {
-//         pollSCM 'H/2 * * * *'
-//     }
-    options {
-        disableConcurrentBuilds()
-    }
     environment {
         APP = "ap-jenkins-basic-nodejs"
+        PORT="3000"
+        HOST="localhost"
     }
     stages {
-        stage('Build and Publish APP') {
+        stage('Initiate new code') {
             steps {
-                /*
-                * Multiline strings can be used for larger scripts.
-                */
-                sh """
-                # rm 'jenkins-basic-nodejs' -r || true
-                # git clone https://github.com/aamirpinger/jenkins-basic-nodejs.git
-                # cd jenkins-basic-nodejs
-                docker build -t ${APP} .
-                """
+                // install dependencies
+                sh npm install
             }
         }
-        stage('deploy') {
+        stage("Testing Stage"){
+            steps{
+               // Run your unit tests
+               sh npm run test
+            }
+        }
+        stage("Build Stage"){
+            steps{
+                // docker image creation
+                sh docker build -t ${APP}:${BUILD_NUMBER} .
+            }
+        }
+        stage('Deploy') {
             steps {
                 /*
                 * Multiline strings can be used for larger scripts.
                 */
                 sh """
                 docker rm ${APP} --force || true
-                docker run -d --name ${APP} -p 3000:3000 ${APP}
+                docker run -d --name ${APP} -p ${PORT}:3000 ${APP}
                 """
             }
         }
@@ -40,7 +41,7 @@ pipeline {
             mail to: 'aamirpinger@gmail.com', from: 'aamirpinger@gmail.com',
                 subject: "New build for '${env.JOB_NAME}' is Successful!!",
                 body: "Job Succeed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
-            echo "App can be accessed from http://localhost:3000"
+            echo "App can be accessed from http://${HOST}:${PORT}"
         }
          failure {
             mail to: 'aamirpinger@gmail.com', from: 'aamirpinger@gmail.com',
