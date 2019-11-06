@@ -9,19 +9,19 @@ pipeline {
         stage('Initiate new code') {
             steps {
                 // install dependencies
-                sh npm install
+                sh "npm install"
             }
         }
         stage("Testing Stage"){
             steps{
                // Run your unit tests
-               sh npm run test
+               sh "npm run test"
             }
         }
         stage("Build Stage"){
             steps{
                 // docker image creation
-                sh docker build -t ${APP}:${BUILD_NUMBER} .
+                sh "docker build -t ${APP}:${BUILD_NUMBER} .
             }
         }
         stage('Deploy') {
