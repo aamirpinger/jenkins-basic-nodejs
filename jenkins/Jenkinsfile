@@ -25,7 +25,10 @@ pipeline {
             steps{
                 // docker image creation
                 // sh "docker build -t ${APP}:${BUILD_NUMBER} ."
-                docker.build "${APP}:${BUILD_NUMBER}"
+                script{
+                    docker.build "${APP}:${BUILD_NUMBER}"
+                }
+
             }
         }
         stage('Deploy') {
