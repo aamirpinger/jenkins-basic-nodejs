@@ -1,7 +1,9 @@
 pipeline {
    agent {
-       image: node:alpine
-   }
+         docker{
+            image 'node:10-alpine'
+         }
+     }
     environment {
         APP = "ap-jenkins-basic-nodejs"
         PORT="3000"
