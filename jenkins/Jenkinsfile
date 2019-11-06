@@ -1,9 +1,7 @@
 pipeline {
    agent {
          docker{
-            image 'node:10'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-         }
+            image 'node:10'         }
      }
     environment {
         APP = "ap-jenkins-basic-nodejs"
@@ -26,7 +24,8 @@ pipeline {
         stage("Build Stage"){
             steps{
                 // docker image creation
-                sh "docker build -t ${APP}:${BUILD_NUMBER} ."
+                // sh "docker build -t ${APP}:${BUILD_NUMBER} ."
+                docker.build "${APP}:${BUILD_NUMBER}"
             }
         }
         stage('Deploy') {
