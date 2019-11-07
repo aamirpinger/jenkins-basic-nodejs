@@ -9,9 +9,7 @@ pipeline {
         PORT="3000"
         HOST="localhost"
     }
-    tools{
-        npm: 'node'
-    }
+    tools {nodejs 'node-10'}
     stages {
         stage('Build') {
             steps {
