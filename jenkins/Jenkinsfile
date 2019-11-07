@@ -9,14 +9,14 @@ pipeline {
         PORT="3000"
         HOST="localhost"
     }
-    // tools{
-    //     npm: 'node'
-    // }
+    tools{
+        npm: 'node'
+    }
     stages {
         stage('Build') {
             steps {
-                // install dependencies
-                // sh "npm install"
+                install dependencies
+                sh "npm install"
             }
         }
         stage("Testing Stage"){
