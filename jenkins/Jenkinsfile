@@ -1,7 +1,8 @@
 pipeline {
    agent {
          docker{
-            image 'node:10'         }
+            image 'aamirpinger/node:docker'
+            }
      }
     // agent any
     environment {
@@ -9,9 +10,6 @@ pipeline {
         PORT="3000"
         HOST="localhost"
     }
-    // tools {nodejs 'nodejs'}
-    tools{DockerTool "docker"}
-
     stages {
         stage('Build') {
             steps {
@@ -19,19 +17,19 @@ pipeline {
                 sh "npm install"
             }
         }
-        // stage("Testing Stage"){
-        //     steps{
-        //        // Run your unit tests
-        //     //    sh "npm run test"
-        //     }
-        // }
+        stage("Testing Stage"){
+            steps{
+               // Run your unit tests
+               sh "npm run test"
+            }
+        }
         stage("Build Stage"){
             steps{
                 // docker image creation
-                // sh "docker build -t ${APP}:${BUILD_NUMBER} ."
-                script{
-                    docker.build("${APP}:${BUILD_NUMBER}",".")
-                }
+                sh "docker build -t ${APP}:${BUILD_NUMBER} ."
+                // script{
+                //     docker.build("${APP}:${BUILD_NUMBER}",".")
+                // }
 
             }
         }
