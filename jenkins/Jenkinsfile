@@ -1,15 +1,16 @@
 pipeline {
-//    agent {
-//          docker{
-//             image 'node:10'         }
-//      }
-    agent any
+   agent {
+         docker{
+            image 'node:10'         }
+     }
+    // agent any
     environment {
         APP = "ap-jenkins-basic-nodejs"
         PORT="3000"
         HOST="localhost"
     }
-    tools {nodejs 'nodejs'}
+    // tools {nodejs 'nodejs'}
+    tools{docker "DockerTool"}
 
     stages {
         stage('Build') {
@@ -18,12 +19,12 @@ pipeline {
                 sh "npm install"
             }
         }
-        stage("Testing Stage"){
-            steps{
-               // Run your unit tests
-            //    sh "npm run test"
-            }
-        }
+        // stage("Testing Stage"){
+        //     steps{
+        //        // Run your unit tests
+        //     //    sh "npm run test"
+        //     }
+        // }
         stage("Build Stage"){
             steps{
                 // docker image creation
