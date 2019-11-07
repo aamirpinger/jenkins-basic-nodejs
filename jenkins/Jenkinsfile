@@ -10,18 +10,18 @@ pipeline {
         HOST="localhost"
     }
     stages {
-        stage('Initiate new code') {
-            steps {
-                // install dependencies
-                // sh "npm install"
-            }
-        }
-        stage("Testing Stage"){
-            steps{
-               // Run your unit tests
-            //    sh "npm run test"
-            }
-        }
+        // stage('Initiate new code') {
+        //     steps {
+        //         // install dependencies
+        //         // sh "npm install"
+        //     }
+        // }
+        // stage("Testing Stage"){
+        //     steps{
+        //        // Run your unit tests
+        //     //    sh "npm run test"
+        //     }
+        // }
         stage("Build Stage"){
             steps{
                 // docker image creation
