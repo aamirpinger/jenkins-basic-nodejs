@@ -10,7 +10,7 @@ pipeline {
         HOST="localhost"
     }
     // tools {nodejs 'nodejs'}
-    tools{DockerTool "DockerTool"}
+    tools{DockerTool "docker"}
 
     stages {
         stage('Build') {
