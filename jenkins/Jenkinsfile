@@ -10,10 +10,11 @@ pipeline {
         HOST="localhost"
     }
     tools {nodejs 'nodejs'}
+
     stages {
         stage('Build') {
             steps {
-                install dependencies
+                // install dependencies
                 sh "npm install"
             }
         }
