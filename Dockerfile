@@ -1,6 +1,8 @@
 FROM node:alpine
 
-COPY . /jenkins-basic-nodejs
+WORKDIR /jenkins-basic-nodejs
+
+COPY . .
 
 EXPOSE 3000
 
