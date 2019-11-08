@@ -1,5 +1,7 @@
 FROM node:alpine
 
+RUN mkdir /jenkins-basic-nodejs
+
 WORKDIR /jenkins-basic-nodejs
 
 COPY . .
