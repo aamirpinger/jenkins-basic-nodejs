@@ -1,6 +1,6 @@
 FROM node:alpine
 
-COPY . .
+COPY . /jenkins-basic-nodejs
 
 EXPOSE 3000
 
