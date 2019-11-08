@@ -5,7 +5,6 @@ pipeline {
             image 'aamirpinger/node:docker'
             }
      }
-    // agent any
     environment {
         APP = "ap-jenkins-basic-nodejs"
         PORT="3000"
